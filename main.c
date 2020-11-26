@@ -34,12 +34,14 @@ int main(void)
 
     int ndiscos;
     fputs("Discos: ", stdout);
-    do scanf("%d", &ndiscos);
+    do
+        scanf("%d", &ndiscos);
     while (ndiscos <= 0);
 
     int delay_ms;
     fputs("Delay por jogada (ms): ", stdout);
-    do scanf("%d%*c", &delay_ms);
+    do
+        scanf("%d%*c", &delay_ms);
     while (delay_ms < 0);
 
     Hanoi *hanoi = HanoiCreate(ndiscos, ListSize(nomes_lista), nomes);
