@@ -1,3 +1,16 @@
+/**
+ * @file hanoi.c
+ * @author Luiz Fernando F. G. Valle (github.com/luizffgv)
+ * @brief Implementation of the module hanoi
+ * @version 1.0
+ * @date 2020-11-26
+ *
+ * @copyright Copyright (c) 2020.
+ *            Licensed under the GPL-3.0 License.
+ *            See LICENSE in the project root for license information
+ *
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -6,6 +19,10 @@
 #include "hanoimonks.h"
 #include "list.h"
 
+/**
+ * @brief Internal representation of Hanoi
+ *
+ */
 struct Hanoi_
 {
     HanoiMonks *monks;
@@ -16,9 +33,30 @@ struct Hanoi_
     unsigned long long moves;
 };
 
+/**
+ * @brief Internal function that moves a disk from from to to
+ *
+ * @param hanoi Pointer to a game of towers of hanoi
+ * @param from  Pointer to the source stack
+ * @param to    Pointer to the destination stack
+ */
 void MoveDisk_(Hanoi *hanoi, Stack *from, Stack *to);
-void HanoiPrint(size_t ndisks, Stack *from, Stack *aux, Stack *to);
-void TerminalClear(void);
+
+/**
+ * @brief Internal function that displays the towers of a game of hanoi
+ *
+ * @param ndisks Total of disks in the game
+ * @param from   First tower
+ * @param aux    Second tower
+ * @param to     Third tower
+ */
+void HanoiPrint_(size_t ndisks, Stack *from, Stack *aux, Stack *to);
+
+/**
+ * @brief Internal cross-platform function that clears the terminal
+ *
+ */
+void TerminalClear_(void);
 
 Hanoi *HanoiCreate(unsigned ndisks, size_t nmonks, char **names)
 {
@@ -67,7 +105,7 @@ void HanoiSolve(Hanoi *hanoi, int delay_ms)
     HanoiSolve_(hanoi->ndisks, hanoi->from, hanoi->aux, hanoi->to, hanoi,
                 delay_ms);
 
-    TerminalClear();
+    TerminalClear_();
     HanoiMonksPrint(hanoi->monks);
     fflush(stdout);
 }
@@ -100,8 +138,10 @@ void MoveDisk_(Hanoi *hanoi, Stack *from, Stack *to)
 
     if (to == hanoi->to)
         HanoiMonksScoreAdd(hanoi->monks, 3);
-    if (from == hanoi->to)
+    else if (from == hanoi->to)
         HanoiMonksScoreAdd(hanoi->monks, -3);
+    else
+        HanoiMonksScoreAdd(hanoi->monks, 0);
 
     HanoiMonk *monk = HanoiMonkNew("Temp_name");
 
@@ -116,18 +156,18 @@ void MoveDisk_(Hanoi *hanoi, Stack *from, Stack *to)
     char from_ch = from == hanoi->from ? 'A' : from == hanoi->to ? 'C' : 'B';
     char to_ch   = to == hanoi->from ? 'A' : to == hanoi->to ? 'C' : 'B';
 
-    TerminalClear();
+    TerminalClear_();
     printf("Monge %-16.16s - %5lld pts: Movendo %c para %c\n"
            "Movimentos: %llu\n ",
            monk_name, score, from_ch, to_ch, hanoi->moves);
 
     StackPush(to, StackPop(from));
 
-    HanoiPrint(hanoi->ndisks, hanoi->from, hanoi->aux, hanoi->to);
+    HanoiPrint_(hanoi->ndisks, hanoi->from, hanoi->aux, hanoi->to);
     fflush(stdout);
 }
 
-void HanoiPrint(size_t ndisks, Stack *from, Stack *aux, Stack *to)
+void HanoiPrint_(size_t ndisks, Stack *from, Stack *aux, Stack *to)
 {
     const size_t TABS_BETWEEN_STACKS = 3;
 
@@ -170,7 +210,7 @@ void HanoiPrint(size_t ndisks, Stack *from, Stack *aux, Stack *to)
 #endif  // #ifdef __unix__
 }
 
-void TerminalClear(void)
+void TerminalClear_(void)
 {
 #ifdef __unix__
     system("clear");

@@ -1,8 +1,25 @@
+/**
+ * @file hanoimonk.c
+ * @author Luiz Fernando F. G. Valle (github.com/luizffgv)
+ * @brief Implementation of the module hanoimonk
+ * @version 1.0
+ * @date 2020-11-26
+ *
+ * @copyright Copyright (c) 2020.
+ *            Licensed under the GPL-3.0 License.
+ *            See LICENSE in the project root for license information
+ *
+ */
+
 #include <stdlib.h>
 
 #include "dstring.h"
 #include "hanoimonk.h"
 
+/**
+ * @brief Internal representation of HanoiMonk
+ * 
+ */
 struct HanoiMonk_
 {
     DString *name;

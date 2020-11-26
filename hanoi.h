@@ -1,8 +1,16 @@
 /**
  * @file hanoi.h
- * @author github.com/luizffgv
- * @date 2020-11-22
+ * @author Luiz Fernando F. G. Valle (github.com/luizffgv)
+ * @brief Interface of the module hanoi
+ * @version 1.0
+ * @date 2020-11-26
+ * 
+ * @copyright Copyright (c) 2020.
+ *            Licensed under the GPL-3.0 License.
+ *            See LICENSE in the project root for license information
+ * 
  */
+
 #ifndef HANOI_H
 #define HANOI_H
 
@@ -10,6 +18,10 @@
 #include "queue.h"
 #include "stack.h"
 
+/**
+ * @brief Stores information of a game of towers of hanoi
+ * 
+ */
 typedef struct Hanoi_ Hanoi;
 
 /**

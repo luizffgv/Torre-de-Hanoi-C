@@ -1,8 +1,16 @@
 /**
  * @file hanoimonks.h
- * @author github.com/luizffgv
- * @date 2020-11-22
+ * @author Luiz Fernando F. G. Valle (github.com/luizffgv)
+ * @brief Interface of the module hanoimonks
+ * @version 1.0
+ * @date 2020-11-26
+ * 
+ * @copyright Copyright (c) 2020.
+ *            Licensed under the GPL-3.0 License.
+ *            See LICENSE in the project root for license information
+ * 
  */
+
 #ifndef HANOIMONKS_H
 #define HANOIMONKS_H
 

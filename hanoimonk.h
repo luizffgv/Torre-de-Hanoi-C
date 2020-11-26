@@ -1,13 +1,25 @@
 /**
  * @file hanoimonk.h
- * @author github.com/luizffgv
- * @date 2020-11-22
+ * @author Luiz Fernando F. G. Valle (github.com/luizffgv)
+ * @brief Interface of the module hanoimonk
+ * @version 1.0
+ * @date 2020-11-26
+ *
+ * @copyright Copyright (c) 2020.
+ *            Licensed under the GPL-3.0 License.
+ *            See LICENSE in the project root for license information
+ *
  */
+
 #ifndef HANOIMONK_H
 #define HANOIMONK_H
 
 #include <stddef.h>
 
+/**
+ * @brief Stores the information about a monk
+ * 
+ */
 typedef struct HanoiMonk_ HanoiMonk;
 
 /**

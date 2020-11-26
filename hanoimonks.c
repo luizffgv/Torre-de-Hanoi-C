@@ -1,13 +1,27 @@
+/**
+ * @file hanoimonks.c
+ * @author Luiz Fernando F. G. Valle (github.com/luizffgv)
+ * @brief Implementation of the module hanoimonks
+ * @version 1.0
+ * @date 2020-11-26
+ *
+ * @copyright Copyright (c) 2020.
+ *            Licensed under the GPL-3.0 License.
+ *            See LICENSE in the project root for license information
+ *
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
-
-// TEMP
-#include "crosssleep.h"
 
 #include "hanoimonks.h"
 #include "list.h"
 #include "queue.h"
 
+/**
+ * @brief Internal representation of HanoiMonks
+ *
+ */
 struct HanoiMonks_
 {
     Queue *monks;
