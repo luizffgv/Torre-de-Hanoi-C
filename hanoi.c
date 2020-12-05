@@ -34,13 +34,30 @@ struct Hanoi_
 };
 
 /**
+ * @brief Internal function that solves a game of hanoi recursively
+ *
+ * @param disks Number of disks
+ * @param from Source stack
+ * @param aux Auxiliary stack
+ * @param to Target stack
+ * @param hanoi The state of the game
+ * @param delay_ms Delay between turns
+ */
+static void HanoiSolve_(size_t disks,
+                        Stack *from,
+                        Stack *aux,
+                        Stack *to,
+                        Hanoi *hanoi,
+                        int delay_ms);
+
+/**
  * @brief Internal function that moves a disk from from to to
  *
  * @param hanoi Pointer to a game of towers of hanoi
  * @param from  Pointer to the source stack
  * @param to    Pointer to the destination stack
  */
-void MoveDisk_(Hanoi *hanoi, Stack *from, Stack *to);
+static void MoveDisk_(Hanoi *hanoi, Stack *from, Stack *to);
 
 /**
  * @brief Internal function that displays the towers of a game of hanoi
@@ -50,36 +67,54 @@ void MoveDisk_(Hanoi *hanoi, Stack *from, Stack *to);
  * @param aux    Second tower
  * @param to     Third tower
  */
-void HanoiPrint_(size_t ndisks, Stack *from, Stack *aux, Stack *to);
+static void HanoiPrint_(size_t ndisks, Stack *from, Stack *aux, Stack *to);
 
 /**
  * @brief Internal cross-platform function that clears the terminal
  *
  */
-void TerminalClear_(void);
+static void TerminalClear_(void);
+
+
+
+
+
+
+
+
+
 
 Hanoi *HanoiCreate(unsigned ndisks, size_t nmonks, char **names)
 {
     Hanoi *hanoi = malloc(sizeof(*hanoi));
 
     hanoi->ndisks = ndisks;
-    hanoi->moves  = 0;
+    hanoi->moves = 0;
 
     hanoi->monks = HanoiMonksNew(nmonks, names);
 
     hanoi->from = StackNew();
-    hanoi->aux  = StackNew();
-    hanoi->to   = StackNew();
+    hanoi->aux = StackNew();
+    hanoi->to = StackNew();
 
     for (unsigned disk_i = 0; disk_i < ndisks; ++disk_i)
     {
         size_t *node = malloc(sizeof(*node));
-        *node        = ndisks - disk_i;
+        *node = ndisks - disk_i;
         StackPush(hanoi->from, node);
     }
 
     return hanoi;
 }
+
+
+
+
+
+
+
+
+
 
 void HanoiDelete(Hanoi **hanoi)
 {
@@ -93,12 +128,14 @@ void HanoiDelete(Hanoi **hanoi)
     *hanoi = NULL;
 }
 
-void HanoiSolve_(size_t disks,
-                 Stack *from,
-                 Stack *aux,
-                 Stack *to,
-                 Hanoi *hanoi,
-                 int delay_ms);
+
+
+
+
+
+
+
+
 
 void HanoiSolve(Hanoi *hanoi, int delay_ms)
 {
@@ -109,6 +146,15 @@ void HanoiSolve(Hanoi *hanoi, int delay_ms)
     HanoiMonksPrint(hanoi->monks);
     fflush(stdout);
 }
+
+
+
+
+
+
+
+
+
 
 void HanoiSolve_(size_t disks,
                  Stack *from,
@@ -132,6 +178,15 @@ void HanoiSolve_(size_t disks,
     }
 }
 
+
+
+
+
+
+
+
+
+
 void MoveDisk_(Hanoi *hanoi, Stack *from, Stack *to)
 {
     ++hanoi->moves;
@@ -154,7 +209,7 @@ void MoveDisk_(Hanoi *hanoi, Stack *from, Stack *to)
     HanoiMonkDelete(monk);
 
     char from_ch = from == hanoi->from ? 'A' : from == hanoi->to ? 'C' : 'B';
-    char to_ch   = to == hanoi->from ? 'A' : to == hanoi->to ? 'C' : 'B';
+    char to_ch = to == hanoi->from ? 'A' : to == hanoi->to ? 'C' : 'B';
 
     TerminalClear_();
     printf("Monge %-16.16s - %5lld pts: Movendo %c para %c\n"
@@ -166,6 +221,15 @@ void MoveDisk_(Hanoi *hanoi, Stack *from, Stack *to)
     HanoiPrint_(hanoi->ndisks, hanoi->from, hanoi->aux, hanoi->to);
     fflush(stdout);
 }
+
+
+
+
+
+
+
+
+
 
 void HanoiPrint_(size_t ndisks, Stack *from, Stack *aux, Stack *to)
 {
@@ -209,6 +273,15 @@ void HanoiPrint_(size_t ndisks, Stack *from, Stack *aux, Stack *to)
     puts("Cores disponiveis apenas em UNIX.");
 #endif  // #ifdef __unix__
 }
+
+
+
+
+
+
+
+
+
 
 void TerminalClear_(void)
 {

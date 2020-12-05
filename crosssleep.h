@@ -7,6 +7,13 @@
 #include <windows.h>
 #endif  // #ifdef __unix__
 
-void CrossSleep(int ms);
+static inline void CrossSleep(int ms)
+{
+#ifdef __unix__
+    usleep(ms * 1000);
+#elif defined _WIN32
+    Sleep(ms);
+#endif  // #ifdef __unix__
+}
 
 #endif  // #ifndef CROSSSLEEP_H
